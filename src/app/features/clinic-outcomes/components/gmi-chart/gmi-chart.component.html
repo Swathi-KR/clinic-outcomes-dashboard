@@ -1,0 +1,29 @@
+  <div class="chart-wrapper">
+    <h3 class="chart-title">Glucose Management Indicator (GMI)</h3>
+    
+    <div class="gmi-header">
+      <div class="gmi-label">AVERAGE GMI</div>
+      <div class="gmi-value">
+        {{ averageGmi }}<span class="percent">%</span>
+      </div>
+    </div>
+  
+    <div #container class="chart-container">
+      <svg #svgChart></svg>
+    </div>
+
+  
+    <div class="gmi-legend">
+      <div class="legend-labels-top">
+        <span class="range-label">≤7%</span>
+        <span class="range-label">7–8%</span>
+        <span class="range-label">≥8%</span>
+      </div>
+      <div class="legend-bars">
+        <div class="color-bar good"></div>
+        <div class="color-bar moderate"></div>
+        <div class="color-bar bad"></div>
+      </div>
+      <div class="legend-subtext">GMI (%)</div>
+    </div>
+  </div>

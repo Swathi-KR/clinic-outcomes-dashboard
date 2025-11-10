@@ -1,0 +1,69 @@
+.range-toggle-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    margin: 1rem 0;
+    transform: scale(0.85);
+     transform-origin: left; 
+  }
+  
+  .range-toggle {
+    border: 2px solid #2563eb;
+    border-radius: 9999px;
+    overflow: hidden;
+    height: 40px; /* ↓ Reduce height */
+  }
+  
+  /* Remove checkmark */
+  :host ::ng-deep .mat-pseudo-checkbox,
+  :host ::ng-deep .mat-button-toggle-icon {
+    display: none !important;
+  }
+  
+  /* Base toggle button styling */
+  :host ::ng-deep .mat-button-toggle {
+    width: 130px;
+    border-radius: 0 !important;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #0047FF;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Visual divider between tabs */
+  :host ::ng-deep .mat-button-toggle + .mat-button-toggle {
+    border-left: 2px solid #0047FF !important;
+  }
+
+
+::ng-deep .range-toggle .mat-button-toggle {
+    min-width: 110px; /* ↓ Control width of each tab */
+    padding: 0 16px;
+    font-weight: 600;
+    font-size: 0.9rem; /* ↓ Reduce font size */
+    color: #2563eb;
+  }
+
+  ::ng-deep .range-toggle .mat-button-toggle-checked {
+    background-color: #2563eb !important;
+    color: white !important;
+  }
+
+
+  ::ng-deep .range-toggle .mat-button-toggle:not(.mat-button-toggle-checked) {
+    background-color: white;
+  }
+  
+  ::ng-deep .range-toggle .mat-button-toggle + .mat-button-toggle {
+    border-left: 1px solid #2563eb; /* Separator line between tabs */
+  }
+  
+
+  
+  /* Selected (active) state */
+  :host ::ng-deep .mat-button-toggle-checked {
+    background-color: #0047FF !important;
+    color: white !important;
+  }

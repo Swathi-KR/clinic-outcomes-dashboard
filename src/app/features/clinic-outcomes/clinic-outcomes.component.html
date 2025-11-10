@@ -1,0 +1,46 @@
+  <div class="clinic-outcomes-container">
+    <h1>Clinic Outcomes</h1>
+  
+    <div class="header-row">
+      <!-- Range Tabs -->
+      <app-range-tabs 
+        [selectedRange]="selectedRange"
+        (rangeChange)="onRangeChange($event)">
+      </app-range-tabs>
+  
+      <!-- Print Button -->
+      <button class="print-button">
+        <span class="material-icons">print</span>
+        Print
+      </button>
+    </div>
+  
+    <!-- Rest of the component stays same -->
+    <ng-container *ngIf="data$ | async as data">
+      <app-stats-header [data]="data"></app-stats-header>
+  
+      <div class="charts-grid">
+  
+        <!-- TIR Chart -->
+        <div class="chart-card">
+          <ng-container *ngIf="loading$ | async; else tirLoaded">
+            <app-skeleton-chart></app-skeleton-chart>
+          </ng-container>
+          <ng-template #tirLoaded>
+            <app-tir-chart [tir]="data.tir"></app-tir-chart>
+          </ng-template>
+        </div>
+  
+        <!-- GMI Chart -->
+        <div class="chart-card">
+          <ng-container *ngIf="loading$ | async; else gmiLoaded">
+            <app-skeleton-chart></app-skeleton-chart>
+          </ng-container>
+          <ng-template #gmiLoaded>
+            <app-gmi-chart [gmi]="data.gmi"></app-gmi-chart>
+          </ng-template>
+        </div>
+  
+      </div>
+    </ng-container>
+  </div>
