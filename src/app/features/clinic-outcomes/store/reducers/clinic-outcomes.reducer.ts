@@ -12,6 +12,8 @@ export const initialState: State = {
   data: null,
 };
 
+export const clinicOutcomesFeatureKey = 'clinicOutcomes';
+
 const coreReducer = createReducer(
   initialState,
   on(ClinicOutcomesActions.load, (state) => ({
