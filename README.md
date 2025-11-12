@@ -33,7 +33,9 @@ The system emphasizes clean data visualization, performance, and usability acros
 - Angular CLI
 
 ### Steps to Run Locally
+
 1. Clone the repository:
+   ```bash
    git clone https://github.com/yourusername/ClinicOutcomesDashboard.git
    cd ClinicOutcomesDashboard
 2. Install project dependencies:
