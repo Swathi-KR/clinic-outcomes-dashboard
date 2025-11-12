@@ -1,27 +1,55 @@
-# ClinicOutcomesDashboard
+# Clinic Outcomes Dashboard
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+The Clinic Outcomes Dashboard is an Angular-based web application designed to visualize clinical glucose metrics such as *Time in Range (TIR)* and *Glucose Management Indicator (GMI)*.  
+It provides data-driven insights using interactive D3.js and Charts.js charts and a responsive SCSS-based layout suitable for desktop, tablet, and mobile devices.
 
-## Development server
+## Project Purpose
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This application was developed to present summarized clinical outcomes in a visual and comprehensible format.  
+It allows healthcare teams to review patient glucose performance trends across different time ranges (30, 60, 90 days), enhancing decision-making and patient monitoring efficiency.
 
-## Code scaffolding
+The dashboard focuses on two key metrics:
+- **Time in Range (TIR):** Percentage of glucose readings within optimal range.
+- **Glucose Management Indicator (GMI):** Estimated A1C derived from mean glucose levels.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The system emphasizes clean data visualization, performance, and usability across devices.
 
-## Build
+## Technology Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+| Category | Technology |
+|-----------|-------------|
+| Framework | Angular 18 |
+| Visualization | D3.js, Charts.js |
+| Language | TypeScript |
+| Styling | SCSS (Responsive, Mobile-first) |
+| Build Tool | Angular CLI |
+| Version Control | Git, GitHub |
 
-## Running unit tests
+## Installation and Setup
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Prerequisites
+- Node.js (version 18 or above)
+- npm (Node Package Manager)
+- Angular CLI
 
-## Running end-to-end tests
+### Steps to Run Locally
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/ClinicOutcomesDashboard.git
+   cd ClinicOutcomesDashboard
+2. Install project dependencies:
+npm install
+3. Run the development server:
+ng serve
+The application will be available at http://localhost:4200
 
-## Further help
+---
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Author
+
+**Swathi Meghana Kolar Rajeev**  
+Graduate Student, Computer Science  
+University of Southern California (USC)  
+Email: kolarraj@usc.edu  
+LinkedIn: [https://www.linkedin.com/in/swathi-meghana/](https://www.linkedin.com/in/swathi-meghana/)
