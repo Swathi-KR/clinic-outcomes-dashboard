@@ -10,6 +10,7 @@ export interface ClinicOutcomeData {
       low: number;
       target: number;
       high: number;
+      veryHigh: number;
     };
   
     gmi: {

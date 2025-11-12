@@ -1,69 +1,157 @@
 .clinic-outcomes-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 2rem;
-  
-    h1 {
-      font-size: 2rem;
-      color: #1f2937;
-      margin-bottom: 1rem;
-      font-weight: 700;
-    }
-  }
-  
-  .loading {
-    text-align: center;
-    padding: 2rem;
-    color: #6b7280;
-    font-size: 1.125rem;
-  }
-  
-  .charts-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    margin-top: 2rem;
-  
-    @media (max-width: 1024px) {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  .chart-card {
-    background: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-  }
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.5rem;
+  box-sizing: border-box;
 
+  h1 {
+  font-family: "Montserrat", sans-serif !important;
+    font-size: 1.7rem;
+    color: #1f2937;
+    margin-bottom: -1rem;
+  }
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.print-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 60px;
+  border-radius: 9999px;
+  border: 2px solid rgb(16,16,235);
+  background-color: transparent;
+  color: rgb(16,16,235);
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: 0.2s ease;
+}
+
+.print-button:hover {
+  background-color: #eff6ff;
+}
+
+.material-icons {
+  font-size: 20px;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 0rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chart-card {
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem;
+  overflow: visible;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.material-icons-outlined {
+  font-size: 20px;
+}
+
+// Mobile (320px - 480px)
+@media (max-width: 480px) {
+  .clinic-outcomes-container {
+    padding: 1rem;
+    
+    h1 {
+      font-size: 1.4rem;
+    }
+  }
 
   .header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 0.75rem;
   }
-  
-  /* Print Button Styles */
+
   .print-button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 22px;
-    border-radius: 9999px;
-    border: 2px solid #2563eb;
-    background-color: transparent;
-    color: #2563eb;
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: 0.2s ease;
+    padding: 6px 20px;
+    font-size: 0.8rem;
   }
-  
-  .print-button:hover {
-    background-color: #eff6ff;
+
+  .charts-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-  
-  .material-icons {
-    font-size: 20px;
+
+  .chart-card {
+    padding: 0rem;
   }
+}
+
+// Tablet Portrait (481px - 768px)
+@media (min-width: 481px) and (max-width: 768px) {
+  .clinic-outcomes-container {
+    padding: 1.2rem;
+    
+    h1 {
+      font-size: 1.6rem;
+    }
+  }
+
+  .header-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .print-button {
+    padding: 6px 18px;
+    font-size: 0.85rem;
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+// Small Desktop/Tablet Landscape (769px - 1024px)
+@media (min-width: 769px) and (max-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+// Medium Desktop (1025px - 1366px)
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .charts-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+// Large Desktop (1367px and up)
+@media (min-width: 1367px) {
+  .clinic-outcomes-container {
+    max-width: 1400px;
+  }
+
+  .charts-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}

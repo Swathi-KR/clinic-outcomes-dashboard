@@ -1,126 +1,272 @@
 .chart-wrapper {
-  width: 100%;
-  padding: 1rem 0;
-}
-
-.chart-title {
-  font-size: 1.125rem;
-  color: #4338ca;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-align: left;
-}
-
-.gmi-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.gmi-label {
-  font-size: 0.75rem;
-  color: #9CA3AF;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.25rem;
-}
-
-.gmi-value {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #1f2937;
-  line-height: 1;
-}
-
-.gmi-value .percent {
-  font-size: 1.25rem;
-  margin-left: 2px;
-}
-
-.chart-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: -2rem;
-  min-height: 300px;
-}
-
-.tooltip {
-  position: absolute;
-  background: rgba(17, 24, 39, 0.95);
-  color: white;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 500;
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 9999;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  display: block;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 6px solid transparent;
-    border-top-color: rgba(17, 24, 39, 0.95);
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem 0.5rem;
+    box-sizing: border-box;
+    overflow-x: hidden;
   }
-}
-
-.gmi-legend {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: -0.5rem;
-}
-
-.legend-labels-top {
-  display: flex;
-  justify-content: space-around;
-  width: 280px;
-  margin-bottom: 0.25rem;
-}
-
-.range-label {
-  font-size: 0.75rem;
-  color: #374151;
-  font-weight: 600;
-  text-align: center;
-  flex: 1;
-}
-
-.legend-bars {
-  display: flex;
-  width: 220px;
-  height: 12px;
-  border-radius: 2px;
-  overflow: hidden;
-  gap: 6px;
-}
-
-.color-bar {
-  flex: 1;
   
-  &.good {
-    background-color: #81CF35;
+  .chart-title {
+      font-family: "Montserrat", sans-serif !important; 
+      font-size: 1.6rem;
+      color: rgb(30, 21, 114);
+      font-weight: 400; 
+      margin-bottom: 1rem;
+      margin-top: -1rem;
+      text-align: left;
+    }
+    
+  
+  .gmi-header {
+    text-align: center;
+    margin-bottom: -0.5rem;
   }
-
-  &.moderate {
-    background-color: #FFAF33;
+  
+  .gmi-label {
+    font-size: 0.85rem;
+    color: #000000;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
   }
-
-  &.bad {
-    background-color: #EC1830;
+  
+  .gmi-value {
+    font-family: "Lato", sans-serif; 
+    font-size: 2.3rem;
+    font-weight: 300;
+    color: #1f2937;
+    line-height: 1;
   }
-}
-
-.legend-subtext {
-  font-size: 0.7rem;
-  color: #9CA3AF;
-  margin-top: 0.25rem;
-}
+  
+  .gmi-value .percent {
+      font-family: "Lato", sans-serif; 
+      font-size: 1rem; 
+      font-weight: 400; 
+      margin-left: 2px;
+  }
+  
+  .chart-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 0rem;
+    min-height: 250px;
+    max-height: 350px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  
+    canvas {
+      max-width: 100% !important;
+      max-height: 100% !important;
+      height: auto !important;
+      width: auto !important;
+    }
+  }
+  
+  .tooltip {
+    position: absolute;
+    background: rgba(17, 24, 39, 0.95);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: block;
+  
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: rgba(17, 24, 39, 0.95);
+    }
+  }
+  
+  .gmi-legend {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: -0.5rem;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .legend-labels-top {
+    display: flex;
+    justify-content: space-around;
+    width: min(225px, 90%);
+    margin-bottom: 0.25rem;
+  }
+  
+  .range-label {
+      font-size: 0.9rem;
+      color: #6b7280; 
+      font-weight: 400; 
+      text-align: center;
+      flex: 1;
+    }
+  
+  .legend-bars {
+    display: flex;
+    width: min(175px, 70%);
+    height: 12px;
+    overflow: hidden;
+    gap: 2px;
+  }
+  
+  .color-bar {
+    flex: 1;
+    
+    &.good {
+      background-color: #81CF35;
+    }
+  
+    &.moderate {
+      background-color: #FFAF33;
+    }
+  
+    &.bad {
+      background-color: #EC1830;
+    }
+  }
+  
+  
+  .legend-subtext {
+      font-size: 1rem; 
+      color: #6b7280; 
+      font-weight: 400; 
+      margin-top: 0.25rem;
+    }
+  
+  // Mobile (320px - 480px)
+  @media (max-width: 480px) {
+    .chart-wrapper {
+      padding: 0.75rem 0.5rem;
+      overflow-x: hidden;
+    }
+  
+    .chart-title {
+      font-size: 1.3rem;
+      padding: 0 0.25rem;
+    }
+  
+    .gmi-value {
+      font-size: 1.8rem;
+    }
+  
+    .gmi-label {
+      font-size: 0.75rem;
+    }
+  
+    .chart-container {
+      min-height: 200px;
+      max-height: 260px;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0;
+      overflow: hidden;
+  
+      canvas {
+        max-width: 100% !important;
+        max-height: 260px !important;
+        width: auto !important;
+        height: auto !important;
+      }
+    }
+  
+    .legend-labels-top {
+      width: min(200px, 95%);
+    }
+  
+    .legend-bars {
+      width: min(150px, 75%);
+      height: 10px;
+    }
+  
+    .range-label {
+      font-size: 0.75rem;
+    }
+  
+    .legend-subtext {
+      font-size: 0.85rem;
+    }
+  }
+  
+  // Tablet Portrait (481px - 768px)
+  @media (min-width: 481px) and (max-width: 768px) {
+    .chart-wrapper {
+      padding: 0.75rem 0.5rem;
+    }
+  
+    .chart-title {
+      font-size: 1.5rem;
+    }
+  
+    .gmi-value {
+      font-size: 2rem;
+    }
+  
+    .chart-container {
+      min-height: 220px;
+      max-height: 300px;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0;
+  
+      canvas {
+        max-width: 100% !important;
+        max-height: 300px !important;
+      }
+    }
+    
+    .legend-labels-top {
+      width: min(200px, 90%);
+    }
+  
+    .legend-bars {
+      width: min(160px, 72%);
+    }
+  
+    .range-label {
+      font-size: 0.85rem;
+    }
+  }
+  
+  // Small Desktop/Tablet Landscape (769px - 1024px)
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .chart-container {
+      min-height: 240px;
+      max-height: 320px;
+  
+      canvas {
+        max-width: 100% !important;
+        max-height: 320px !important;
+      }
+    }
+  }
+  
+  // Large Desktop (1441px and up)
+  @media (min-width: 1441px) {
+    .chart-container {
+      max-height: 380px;
+      
+      canvas {
+        max-width: 100% !important;
+        max-height: 380px !important;
+      }
+    }
+  }
   

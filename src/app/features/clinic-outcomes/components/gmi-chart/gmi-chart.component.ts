@@ -21,15 +21,15 @@ type Gmi = { good: number; moderate: number; bad: number };
 export class GmiChartComponent implements AfterViewInit, OnChanges {
   @Input() gmi!: Gmi;
 
-  // IMPORTANT: use SVGSVGElement (root <svg/>), not generic SVGElement
+  // IMPORTANT: need to use SVGSVGElement (root <svg/>), not generic SVGElement
   @ViewChild('svgChart', { static: false }) svgRef!: ElementRef<SVGSVGElement>;
   @ViewChild('container', { static: false }) containerRef!: ElementRef<HTMLDivElement>;
 
   averageGmi = 0;
 
   private width = 400;
-  private height = 300;
-  private radius = 100;
+  private height = 260;
+  private radius = 85;
 
   private color = d3
     .scaleOrdinal<string>()
@@ -53,121 +53,100 @@ export class GmiChartComponent implements AfterViewInit, OnChanges {
   }
 
   private draw(): void {
-    const svgRoot = this.svgRef.nativeElement; // SVGSVGElement
+    const svgRoot = this.svgRef.nativeElement;
     const svg = d3.select(svgRoot);
     svg.selectAll('*').remove();
-
+  
     const cx = this.width / 2;
     const cy = this.height / 2;
-
+  
     const data = [
       { key: 'good', label: '≤7%', value: this.gmi.good },
       { key: 'moderate', label: '7–8%', value: this.gmi.moderate },
       { key: 'bad', label: '≥8%', value: this.gmi.bad },
     ];
-
+  
     const root = svg
       .attr('width', this.width)
       .attr('height', this.height)
       .append('g')
       .attr('transform', `translate(${cx},${cy})`);
-
-    // SVG tooltip group
-
-    // Tooltip group
-const tipLayer = svg.append('g')
-.style('pointer-events', 'none')
-.style('opacity', 0);
-
-// Background box
-const tipBg = tipLayer.append('rect')
-.attr('rx', 6)
-.attr('ry', 6)
-.attr('fill', 'rgba(31, 41, 55, 0.87)')   // darker + subtle transparency
-.attr('stroke', 'rgba(255,255,255,0.1)')
-.attr('stroke-width', 1);
-
-// Text
-const tipText = tipLayer.append('text')
-.attr('fill', '#fff')
-.attr('font-size', 14)
-.attr('font-weight', 600)
-.attr('text-anchor', 'middle')
-.attr('dominant-baseline', 'middle');
-
-// * New: Tooltip pointer tail triangle *
-const tipPointer = tipLayer.append('path')
-.attr('fill', 'rgba(31, 41, 55, 0.92)');
- 
-    const pie = d3
-      .pie<{ key: string; label: string; value: number }>()
-      .value((d) => d.value)
-      .sort(null);
-
+  
+    const tipLayer = svg
+      .append('g')
+      .style('pointer-events', 'none')
+      .style('opacity', 0);
+  
+    const tipBg = tipLayer
+      .append('rect')
+      .attr('rx', 6)
+      .attr('ry', 6)
+      .attr('fill', 'rgba(31, 41, 55, 0.87)')
+      .attr('stroke', 'rgba(255,255,255,0.1)')
+      .attr('stroke-width', 1);
+  
+    const tipText = tipLayer
+      .append('text')
+      .attr('fill', '#fff')
+      .attr('font-size', 14)
+      .attr('font-weight', 600)
+      .attr('text-anchor', 'middle')
+      .attr('dominant-baseline', 'middle');
+  
+    const tipPointer = tipLayer
+      .append('path')
+      .attr('fill', 'rgba(31, 41, 55, 0.87)');
+  
+    const pie = d3.pie<any>().value((d) => d.value).sort(null);
     const arcs = pie(data);
     const arc = d3.arc<any>().innerRadius(0).outerRadius(this.radius);
-
-    // Draw slices
+  
+    const originalArcs = arcs.map(d => ({
+      ...d,
+      originalStartAngle: d.startAngle,
+      originalEndAngle: d.endAngle
+    }));
+  
     const slices = root
       .selectAll('path.slice')
       .data(arcs)
       .join('path')
       .attr('class', 'slice')
-      .attr('d', arc as any)
-      .attr('fill', (d) => this.color(d.data.key)!)
+      .attr('fill', (d: any) => this.color(d.data.key)!)
       .attr('stroke', '#ffffff')
       .attr('stroke-width', 2)
       .style('cursor', 'pointer');
-
-    // Helper to move tooltip near cursor using SVG coords
-
+  
     const moveTip = (evt: MouseEvent, text: string) => {
       tipText.text(text);
-    
-      // Measure text width & height
+  
       const bbox = (tipText.node() as SVGGraphicsElement).getBBox();
       const padX = 12, padY = 8;
-      const width = bbox.width + padX * 2;
-      const height = bbox.height + padY * 2;
-    
-      // Background (center above pointer)
-      tipBg
-        .attr('width', width)
-        .attr('height', height)
-        .attr('x', -width / 2)
-        .attr('y', -height - 10);
-    
-      // Text centered inside pill
-      tipText
-        .attr('x', 0)
-        .attr('y', -height / 2 - 10);
-    
-      // Pointer triangle
-      tipPointer.attr(
-        'd',
-        `M -8 ${-10} L 0 ${2} L 8 ${-10}`
-      );
-    
-      // Convert screen → SVG coords
+      const w = bbox.width + padX * 2;
+      const h = bbox.height + padY * 2;
+  
+      tipBg.attr('width', w).attr('height', h).attr('x', -w / 2).attr('y', -h - 10);
+      tipText.attr('x', 0).attr('y', -h / 2 - 10);
+      tipPointer.attr('d', `M -8 -10 L 0 2 L 8 -10`);
+  
       const pt = svgRoot.createSVGPoint();
       pt.x = evt.clientX;
       pt.y = evt.clientY;
       const svgP = pt.matrixTransform(svgRoot.getScreenCTM()!.inverse());
-    
-      tipLayer.attr('transform', `translate(${svgP.x}, ${svgP.y})`);
+      tipLayer.attr('transform', `translate(${svgP.x},${svgP.y})`);
     };
+  
     slices
-    .on('mousemove', (event, d) => {
-      const clinicalLabels: Record<string, string> = {
-        '≤7%': 'Good Control',
-        '7–8%': 'Moderate Control',
-        '≥8%': 'High Risk'
-      };
-    
-      moveTip(event, `${clinicalLabels[d.data.label]} • ${d.data.value}%`);
-      tipLayer.style('opacity', 1);
-    })
-
+      .on('mousemove', (event: MouseEvent, d: any) => {
+        const clinicalLabels: Record<string, string> = {
+          '≤7%': 'Good Control',
+          '7–8%': 'Moderate Control',
+          '≥8%': 'High Risk',
+        };
+  
+        moveTip(event, `${clinicalLabels[d.data.label]} • ${d.data.value}%`);
+        tipLayer.style('opacity', 1);
+      })
       .on('mouseenter', function () {
         d3.select(this).attr('stroke-width', 3);
         tipLayer.style('opacity', 1);
@@ -176,18 +155,34 @@ const tipPointer = tipLayer.append('path')
         d3.select(this).attr('stroke-width', 2);
         tipLayer.style('opacity', 0);
       });
-
-    // Horizontal leader lines + labels
-    arcs.forEach((d) => {
-      const mid = (d.startAngle + d.endAngle) / 2 - Math.PI / 2;
+  
+    // Sweep-in animation
+    slices
+      .each(function (d: any) {
+        d.endAngleOriginal = d.endAngle;
+        d.endAngle = d.startAngle;
+      })
+      .transition()
+      .duration(900)
+      .ease(d3.easeCubicOut)
+      .attrTween('d', function (d: any) {
+        const interpolate = d3.interpolate(d.startAngle, d.endAngleOriginal);
+        return (t: number) => {
+          d.endAngle = interpolate(t);
+          return arc(d)!;
+        };
+      });
+  
+    originalArcs.forEach((d: any) => {
+      const mid = (d.originalStartAngle + d.originalEndAngle) / 2 - Math.PI / 2;
       const xEdge = Math.cos(mid) * this.radius;
       const yEdge = Math.sin(mid) * this.radius;
       const side = xEdge > 0 ? 1 : -1;
-
-      const lineLen = 56;
-      const xEnd = side * (this.radius + lineLen);
+  
+      const lineLength = 60;
+      const xEnd = xEdge + side * lineLength;
       const yEnd = yEdge;
-
+  
       root
         .append('line')
         .attr('x1', xEdge)
@@ -196,7 +191,7 @@ const tipPointer = tipLayer.append('path')
         .attr('y2', yEnd)
         .attr('stroke', '#6B7280')
         .attr('stroke-width', 1);
-
+  
       root
         .append('text')
         .text(`${d.data.value}%`)
@@ -204,12 +199,10 @@ const tipPointer = tipLayer.append('path')
         .attr('y', yEnd)
         .attr('text-anchor', side > 0 ? 'start' : 'end')
         .attr('alignment-baseline', 'middle')
-        .attr('font-size', '14px')
-        .attr('font-weight', '600')
+        .attr('font-size', '18px')
+        .attr('font-weight', '400')
+        .attr('font-family', 'Open Sans')
         .attr('fill', '#374151');
     });
   }
 }
-
-
-

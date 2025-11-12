@@ -1,69 +1,73 @@
 .range-toggle-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin: 1.8rem 0;
+}
+
+.range-toggle {
+  border: 2px solid rgb(16,16,235);
+  border-radius: 9999px;
+  overflow: hidden;
+  height: 36px;
+}
+
+/* Remove checkmark entirely */
+:host ::ng-deep .mat-button-toggle-icon,
+:host ::ng-deep .mat-pseudo-checkbox {
+  display: none !important;
+}
+
+/* Base toggle button */
+:host ::ng-deep .mat-button-toggle {
+  min-width: 120px;
+  font-family: "Montserrat", sans-serif; 
+  font-weight: 500; 
+  font-size: 0.95rem;
+  color: rgb(16,16,235);
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 !important;
+}
+
+/* Divider line between buttons */
+:host ::ng-deep .mat-button-toggle + .mat-button-toggle {
+  border-left: 1px solid rgb(16,16,235);
+}
+
+/* Selected state */
+:host ::ng-deep .mat-button-toggle-checked {
+  background-color: rgb(16,16,235) !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+/* --------------------- RESPONSIVE ---------------------- */
+
+/* Tablet View */
+@media (max-width: 1024px) {
+  .range-toggle-wrapper {
+    transform: scale(0.9);
+    transform-origin: left;
+  }
+}
+
+/* Mobile View */
+@media (max-width: 600px) {
+  .range-toggle-wrapper {
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
-    margin: 1rem 0;
-    transform: scale(0.85);
-     transform-origin: left; 
-  }
-  
-  .range-toggle {
-    border: 2px solid #2563eb;
-    border-radius: 9999px;
-    overflow: hidden;
-    height: 40px; /* ↓ Reduce height */
-  }
-  
-  /* Remove checkmark */
-  :host ::ng-deep .mat-pseudo-checkbox,
-  :host ::ng-deep .mat-button-toggle-icon {
-    display: none !important;
-  }
-  
-  /* Base toggle button styling */
-  :host ::ng-deep .mat-button-toggle {
-    width: 130px;
-    border-radius: 0 !important;
-    font-weight: 600;
-    font-size: 1rem;
-    color: #0047FF;
-    background-color: white;
-    display: flex;
-    align-items: center;
     justify-content: center;
   }
-  
-  /* Visual divider between tabs */
-  :host ::ng-deep .mat-button-toggle + .mat-button-toggle {
-    border-left: 2px solid #0047FF !important;
+
+  .range-toggle {
+    width: 100%;
   }
 
-
-::ng-deep .range-toggle .mat-button-toggle {
-    min-width: 110px; /* ↓ Control width of each tab */
-    padding: 0 16px;
-    font-weight: 600;
-    font-size: 0.9rem; /* ↓ Reduce font size */
-    color: #2563eb;
+  :host ::ng-deep .mat-button-toggle {
+    min-width: 33% !important;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.5rem;
   }
-
-  ::ng-deep .range-toggle .mat-button-toggle-checked {
-    background-color: #2563eb !important;
-    color: white !important;
-  }
-
-
-  ::ng-deep .range-toggle .mat-button-toggle:not(.mat-button-toggle-checked) {
-    background-color: white;
-  }
-  
-  ::ng-deep .range-toggle .mat-button-toggle + .mat-button-toggle {
-    border-left: 1px solid #2563eb; /* Separator line between tabs */
-  }
-  
-
-  
-  /* Selected (active) state */
-  :host ::ng-deep .mat-button-toggle-checked {
-    background-color: #0047FF !important;
-    color: white !important;
-  }
+}
