@@ -15,7 +15,7 @@ import {
   Legend
 } from 'chart.js';
 
-// ✅ Register ALL required chart types/controllers/scales
+// Register ALL required chart types/controllers/scales
 Chart.register(...registerables,
   ChartDataLabels,
   CategoryScale,

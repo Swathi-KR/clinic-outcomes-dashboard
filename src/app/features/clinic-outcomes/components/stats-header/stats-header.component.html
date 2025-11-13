@@ -1,10 +1,10 @@
-  <p>
-    Showing <strong>{{patients}}</strong> patients from last {{range}} days of available data
-    ({{start | date:'MMM d, yyyy'}} - {{end | date:'MMM d, yyyy'}})
-  </p>
-  
-  <small class="text-muted">
-    Only patients with ≥10 days of SG data included.
-    Last updated:
-    <strong>{{updated | date:'MMM d, yyyy, h:mm a'}}</strong>
-  </small>
+  <div class="stats-info">
+    <p>
+      Showing {{ data.patients }} patients from last {{ data.range }} days of available data 
+      from {{ formatDate(data.startDate) }} - {{ formatDate(data.endDate) }}
+    </p>
+    <p class="subtitle">
+      Only patients with a minimum of 10 days of SG data are included. 
+      Last updated on {{ formatDateTime(data.lastUpdated) }}
+    </p>
+  </div>

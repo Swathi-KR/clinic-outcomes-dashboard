@@ -15,16 +15,16 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
 
-    // ✅ Create root store
+    //  Create root store
     provideStore(),
 
-    // ✅ Start root effects system (this is the missing piece!)
+    //  Start root effects system (this is the missing piece!)
     provideEffects(),
 
-    // ✅ Register feature state
+    // Register feature state
     provideState(clinicOutcomesFeature),
 
-    // ✅ Register feature effects
+    //  Register feature effects
     provideEffects(ClinicOutcomesEffects), provideAnimationsAsync(),
   ],
 };

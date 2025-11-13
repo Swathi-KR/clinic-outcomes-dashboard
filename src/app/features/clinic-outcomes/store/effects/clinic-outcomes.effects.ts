@@ -26,7 +26,7 @@ export class ClinicOutcomesEffects {
     private actions$: Actions,
     private service: ClinicOutcomesService
   ) {
-    // ✅ Create the effect AFTER actions$ is injected
+
     this.loadOutcomes$ = createEffect(() =>
       this.actions$.pipe(
         ofType(ClinicOutcomesActions.load),

@@ -10,7 +10,6 @@ export const ClinicOutcomesActions = createActionGroup({
   },
 });
 
-// convenience exports
 export const loadClinicOutcomes = ClinicOutcomesActions.load;
 export const loadClinicOutcomesSuccess = ClinicOutcomesActions.loadSuccess;
 export const loadClinicOutcomesFailure = ClinicOutcomesActions.loadFailure;
